@@ -80,6 +80,22 @@ app.get('/api/parties', (req, res) => {
   });
 });
 
+// ID parameter for single party
+app.get('/api/party/:id', (req, res) => {
+  const sql = `SELECT * FROM parties WHERE id = ?`;
+  const params = [req.params.id];
+  db.query(sql, params, (err, row) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: 'success',
+      data: row
+    });
+  });
+});
+
 // Delete a candidate
 app.delete('/api/candidate/:id', (req, res) => {
   const sql = `DELETE FROM candidates WHERE id = ?`;
