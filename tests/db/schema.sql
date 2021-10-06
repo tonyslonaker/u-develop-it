@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS candidates;
+DROP TABLE IF EXISTS parties;
+
 CREATE TABLE parties (
   id INTEGER AUTO_INCREMENT PRIMARY KEY, 
   name VARCHAR(50) NOT NULL,
@@ -11,5 +14,4 @@ CREATE TABLE candidates (
   party_id INTEGER,
   industry_connected BOOLEAN NOT NULL,
   CONSTRAINT fk_party FOREIGN KEY (party_id) REFERENCES parties(id) ON DELETE SET NULL
-  
 );
