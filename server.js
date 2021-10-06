@@ -50,7 +50,7 @@ app.get('/api/candidate/:id', (req, res) => {
   LEFT JOIN parties
   ON candidates.party_id = parties.id
   WHERE candidates.id = ?`;
-  
+
   const params = [req.params.id];
 
   db.query(sql, params, (err, row) => {
@@ -61,6 +61,21 @@ app.get('/api/candidate/:id', (req, res) => {
     res.json({
       message: 'success',
       data: row
+    });
+  });
+});
+
+// Route for all parties:
+app.get('/api/parties', (req, res) => {
+  const sql = `SELECT * FROM parties`;
+  db.query(sql, (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: 'success',
+      data: rows
     });
   });
 });
